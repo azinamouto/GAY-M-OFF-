@@ -1,0 +1,117 @@
+/* ============================================================
+   GAY-M OFF — Responsive Adaptations
+   Mobile down to 320px, tablet, and touch-screen accessibility
+============================================================ */
+
+@media (max-width: 768px) {
+  body {
+    padding: 8px;
+    align-items: flex-start;
+  }
+
+  .arcade-cabinet {
+    min-height: auto;
+    border-width: 3px;
+    box-shadow: 0 0 16px var(--color-arcade-purple-glow);
+  }
+
+  .screen-container {
+    padding: 16px 14px;
+    min-height: 480px;
+  }
+
+  .arcade-hud {
+    padding: 8px 12px;
+  }
+
+  .menu-main-title {
+    font-size: 1.8rem;
+  }
+
+  .menu-tagline {
+    font-size: 0.95rem;
+  }
+
+  .hud-meter-status {
+    min-width: 100px;
+    font-size: 0.55rem;
+  }
+
+  .bro-meter-outer {
+    width: 90px;
+  }
+
+  .instructions-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .impossible-choices-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .btn-arcade {
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .ending-title {
+    font-size: 1.4rem;
+  }
+
+  .ending-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .runaway-arena {
+    height: 200px;
+  }
+
+  .narrator-card {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .narrator-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+
+  .narrator-text {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-main-title {
+    font-size: 1.5rem;
+  }
+
+  .hud-bro-meter-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .question-text {
+    font-size: 1.05rem;
+  }
+
+  .option-btn {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .runaway-target-btn {
+    font-size: 0.65rem;
+    padding: 10px 14px;
+  }
+}

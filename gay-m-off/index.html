@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GAY-M OFF — Your choices are questionable. The game is worse.</title>
+  <meta name="description" content="A browser-based comedy psychological troll quiz and ragebait arcade game. Your choices are questionable. The game is worse." />
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="GAY-M OFF — Your choices are questionable. The game is worse." />
+  <meta property="og:description" content="A browser-based comedy psychological troll quiz and ragebait arcade game. Your choices are questionable. The game is worse." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Pixel & Arcade Stylesheets -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/responsive.css" />
+</head>
+<body>
+  <!-- CRT Scanlines Overlay -->
+  <div class="crt-overlay" aria-hidden="true"></div>
+
+  <!-- Suspicion Notification Banner -->
+  <div class="suspicion-banner" id="suspicion-banner" role="status" aria-live="polite">
+    ⚠️ SUSPICION DETECTED: BRO PROTOCOL ANOMALY RECORDED ⚠️
+  </div>
+
+  <!-- Master Arcade Cabinet -->
+  <main class="arcade-cabinet" id="arcade-cabinet">
+    <!-- Top HUD Header -->
+    <header class="arcade-hud">
+      <div class="hud-title-badge">
+        <span class="blink-dot" aria-hidden="true"></span>
+        <span>GAY-M OFF</span>
+      </div>
+
+      <div class="hud-bro-meter-container" title="Bro Meter Measurement">
+        <span class="hud-meter-label">BRO METER:</span>
+        <div class="bro-meter-outer" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <div class="bro-meter-fill" id="bro-meter-fill"></div>
+        </div>
+        <span class="hud-meter-status" id="bro-meter-status">Bro Protocol Unstable (50%)</span>
+      </div>
+
+      <div class="hud-controls">
+        <button type="button" class="btn-pixel-hud" id="btn-sound-toggle" data-action="toggle-sound" aria-label="Toggle Sound Effects">
+          🔇 SOUND: OFF
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Screens Container -->
+    <div class="screen-container">
+      
+      <!-- SCREEN 01 — BOOT SEQUENCE -->
+      <section class="game-screen active" id="screen-boot" aria-label="System Boot Sequence">
+        <div class="boot-terminal">
+          <pre>
+GAY-M OFF.EXE
+=====================================
+INITIALIZING BRO PROTOCOL...
+CHECKING COMMON SENSE...
+COMMON SENSE NOT FOUND.
+CALIBRATING TROLL ALGORITHMS...
+=====================================
+SYSTEM READY.
+          </pre>
+          <div class="boot-skip-container">
+            <button type="button" class="btn-arcade warning" data-action="skip-boot">
+              [SKIP BOOT] (SPACE/CLICK)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN 02 — MAIN MENU -->
+      <section class="game-screen" id="screen-menu" aria-label="Main Menu">
+        <div class="menu-title-container">
+          <h1 class="menu-main-title">GAY-M OFF</h1>
+          <p class="menu-tagline">"Your choices are questionable. The game is worse."</p>
+        </div>
+
+        <div class="menu-pixel-art" aria-hidden="true">
+          [ 🕹️ RETRO TROLL SIMULATOR v1.0 🕹️ ]
+        </div>
+
+        <div class="menu-actions">
+          <button type="button" class="btn-arcade primary" data-action="start-game">
+            ★ START GAME ★
+          </button>
+          <button type="button" class="btn-arcade" data-action="how-to-play">
+            HOW TO PLAY
+          </button>
+        </div>
+
+        <div class="menu-footer-version">
+          GITHUB GAME OFF EDITION • PURE VANILLA JS
+        </div>
+      </section>
+
+      <!-- SCREEN 03 — HOW TO PLAY -->
+      <section class="game-screen" id="screen-how-to-play" aria-label="Instructions">
+        <h2 class="section-header">HOW TO PLAY</h2>
+        <div class="instructions-grid">
+          <div class="instruction-card">
+            <div class="rule-num">RULE 01</div>
+            <p><strong>Answer the questions.</strong> There are no right answers, only questionable decisions.</p>
+          </div>
+          <div class="instruction-card">
+            <div class="rule-num">RULE 02</div>
+            <p><strong>Survive the challenges.</strong> The buttons might have their own personal opinions.</p>
+          </div>
+          <div class="instruction-card">
+            <div class="rule-num">RULE 03</div>
+            <p><strong>Don't trust the narrator.</strong> It acts like an expert, but it is purely sarcastic.</p>
+          </div>
+          <div class="instruction-card">
+            <div class="rule-num">RULE 04</div>
+            <p><strong>Try not to lose your mind.</strong> Frustration is a documented gameplay feature.</p>
+          </div>
+        </div>
+
+        <button type="button" class="btn-arcade" data-action="back-to-menu">
+          ⬅ BACK TO MAIN MENU
+        </button>
+      </section>
+
+      <!-- SCREEN 04 — PSYCHOLOGICAL QUIZ -->
+      <section class="game-screen" id="screen-quiz" aria-label="Psychological Quiz">
+        <div class="quiz-header">
+          <span class="quiz-step-badge" id="quiz-step">QUESTION 01 / 10</span>
+          <span class="quiz-warning-pill">INTERROGATION IN PROGRESS</span>
+        </div>
+
+        <div class="question-container">
+          <div class="question-text" id="quiz-question-text">
+            Loading question...
+          </div>
+        </div>
+
+        <div class="options-grid" id="quiz-options-grid">
+          <!-- Populated dynamically by UI manager -->
+        </div>
+      </section>
+
+      <!-- SCREEN 05 — RAGEBAIT CHALLENGES -->
+      <section class="game-screen" id="screen-challenge" aria-label="Ragebait Challenge">
+        <div class="challenge-header">
+          <span class="challenge-title-badge" id="challenge-step-title">CHALLENGE A</span>
+          <span class="challenge-counter" id="challenge-step-counter">PHASE 1 / 3</span>
+        </div>
+
+        <div class="challenge-arena" id="challenge-arena-content">
+          <!-- Populated dynamically by Challenge Manager -->
+        </div>
+      </section>
+
+      <!-- SCREEN 06 — ENDINGS -->
+      <section class="game-screen" id="screen-ending" aria-label="Game Ending">
+        <div class="ending-badge">FINAL SIMULATION VERDICT</div>
+        <h2 class="ending-title" id="ending-title">ENDING A: CERTIFIED BRO</h2>
+
+        <div class="ending-card">
+          <div class="ending-quote" id="ending-quote">
+            "After extensive analysis, we have learned absolutely nothing."
+          </div>
+          <div class="ending-stats-row">
+            <span class="ending-stat-label">BRO METER VERDICT:</span>
+            <span class="ending-stat-val" id="ending-bro-score">50%</span>
+          </div>
+          <div class="ending-stats-row">
+            <span class="ending-stat-label">FRUSTRATION QUOTIENT:</span>
+            <span class="ending-stat-val" id="ending-frustration">0 pts</span>
+          </div>
+          <p id="ending-desc" style="color: var(--color-pixel-muted); font-size: 0.9rem; margin-top: 10px;">
+            Verdict summary details.
+          </p>
+        </div>
+
+        <div class="ending-actions">
+          <button type="button" class="btn-arcade primary" data-action="play-again">
+            🔄 PLAY AGAIN
+          </button>
+          <button type="button" class="btn-arcade" data-action="menu-from-ending">
+            🏠 MAIN MENU
+          </button>
+        </div>
+      </section>
+
+      <!-- Bottom Narrator Dialogue Panel -->
+      <footer class="narrator-box">
+        <div class="narrator-card" id="narrator-card" role="region" aria-label="Narrator Dialogue">
+          <div class="narrator-avatar" aria-hidden="true">🤖</div>
+          <div class="narrator-content">
+            <div class="narrator-label">CABINET NARRATOR:</div>
+            <div class="narrator-text" id="narrator-text-output" aria-live="polite">
+              Initializing system...
+            </div>
+          </div>
+          <span class="narrator-skip-hint">[CLICK TO SKIP TEXT]</span>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ES6 Vanilla JavaScript Application Entry -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "GAY-M OFF",
+  "description": "Your choices are questionable. The game is worse. A retro pixel-art comedy troll quiz and ragebait arcade game.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

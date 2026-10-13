@@ -1,139 +1,73 @@
-# GAY-M-OFF-
-Github Game off - annual game jam challenge
+# GAY-M OFF 🕹️
 
-# GAY-M OFF
+> *"Your choices are questionable. The game is worse."*
 
-**A totally normal game for totally normal bros.**
-
-*Your choices are questionable. The game is worse.*
+A browser-based comedy psychological troll quiz and ragebait arcade game built with vanilla HTML5, CSS3, and ES6+ JavaScript. Designed for the GitHub Game Off.
 
 ---
 
-## WHAT IS THIS?
+## 🎮 Game Overview
 
-**GAY-M OFF** is a chaotic, meme-inspired browser game where your patience, decisions, and friendships are put to the test.
+**GAY-M OFF** combines two comedic game mechanics:
+1. **Psychological Troll Quiz:** 10 satirical, deadpan questions that challenge the arbitrary rules of "the bro code" with sarcastic commentary, screen shakes, suspicion alerts, and unpredictable consequences.
+2. **Ragebait Challenges:** 3 intentionally aggravating but fair challenges:
+   - **Challenge A — The Runaway Button:** A button that evades cursor approach up to 3 times within bounded coordinates before getting exhausted and clickable.
+   - **Challenge B — The Fake Progress Bar:** A synchronization bar that loads to 99%, hits the player with an existential troll alert, drops to 12%, and resumes cleanly to 100%.
+   - **Challenge C — The Impossible Question:** An unhinged quantum bro-physics question that initially rejects answers before revealing the comedic bailout escape hatch: *"FINE. JUST LET ME PASS."*
 
-Answer ridiculous questions. Survive suspicious situations. Get roasted by a game that doesn't even know what it's talking about.
+---
 
-The rules are simple.
+## 🛠️ Architecture
 
-**Don't trust the game. Don't trust the buttons. Definitely don't trust the results.**
-
-This game is made for laughs, friendly trolling, and a little bit of rage.
-
-No actual sexuality detection here. Just pure nonsense.
-
-## THE GAMEPLAY
-
-**01 — The Questionable Quiz**
-
-Answer some completely normal questions.
-
-Except they're not normal.
-
-And somehow, every answer makes things worse.
-
-**02 — The Bro Meter**
-
-A scientifically inaccurate meter that judges your decisions.
-
-Accuracy: 0%.
-
-Confidence: 100%.
-
-**03 — Rage Mode**
-
-Think you're about to win?
-
-That's cute.
-
-Buttons move. Questions change. The game cheats.
-
-**04 — The Final Verdict**
-
-Congratulations. You've survived.
-
-Your reward?
-
-An absolutely meaningless result.
-
-## BUILT WITH
-
-Keeping things simple for my first game jam.
-
-- **HTML5** — Structure and game screens
-- **CSS3** — Styling, animations, and visual chaos
-- **JavaScript** — Game logic, interactions, and questionable decisions
-
-No frameworks. No complicated setup. Just vibes and vanilla JavaScript.
-
-## RUN IT LOCALLY
-
-Clone the repository:
-
-```bash
-git clone https://github.com/YOUR_USERNAME/GAY-M-OFF.git
-```
-
-Open the project folder and launch `index.html` in your browser.
-
-That's it. You're ready to make questionable decisions.
-
-## PROJECT STRUCTURE
+Built completely with native web technologies — no frameworks, no external runtime dependencies:
 
 ```text
-GAY-M-OFF/
-├── index.html
+gay-m-off/
+├── index.html          # Clean semantic markup with retro arcade cabinet layout
 ├── css/
-│   └── style.css
+│   ├── style.css       # Core arcade design system & tokens (Void Black, Chaos Pink, Arcade Purple, Warning Yellow, Pixel White)
+│   ├── animations.css  # Scanlines, typewriter, screen shake, chromatic glitch & prefers-reduced-motion
+│   └── responsive.css  # Mobile adaptations down to 320px with accessible touch targets
 ├── js/
-│   ├── game.js
-│   └── questions.js
-├── assets/
-│   ├── images/
-│   └── sounds/
+│   ├── main.js         # GameController orchestration & global event delegation
+│   ├── state.js        # Single source of truth & finite state machine
+│   ├── questions.js    # 10 satirical questions with state deltas & reaction pools
+│   ├── challenges.js   # 3 ragebait challenges with boundary checking & lifecycle cleanups
+│   ├── narrator.js     # Context-aware dialogue system with anti-repetition & typewriter effect
+│   ├── endings.js      # Deterministic ending calculation (Certified Bro, Chaos Detected, The Game Lost)
+│   ├── audio.js        # Synthesized Web Audio API retro 8-bit sound effects
+│   └── ui.js           # DOM manipulation, HUD rendering, Bro Meter, and screen switching
 └── README.md
 ```
 
-## GAME JAM
+---
 
-**Event:** GitHub Game Off 2026
+## 🚀 How to Run
 
-**Developer:** AJ Rienze
+### Option 1: Any Static Web Server
+Because the game uses standard ES6 modules, serve it through any static server:
+```bash
+# Python 3
+python3 -m http.server 8000
 
-**Status:** In Development
+# Node / npx
+npx serve .
+```
+Then navigate to `http://localhost:8000`.
 
-**Category:** Browser Game / Comedy / Rage Game
+### Option 2: Vite Dev Server 
+```bash
+npm run dev
+```
 
-My first game jam entry. I'm here to learn, experiment, make something stupidly entertaining, and hopefully finish before the deadline.
-
-## DEVELOPMENT ROADMAP
-
-- [ ] Build the main menu
-- [ ] Create the question system
-- [ ] Add the Bro Meter
-- [ ] Implement rage-inducing interactions
-- [ ] Add sound effects and animations
-- [ ] Create multiple endings
-- [ ] Make it mobile-friendly
-- [ ] Test and fix bugs
-- [ ] Deploy on GitHub Pages
-- [ ] Submit to Game Off
-
-## A VERY SERIOUS DISCLAIMER
-
-This game is satire.
-
-It does not determine anyone's sexuality, personality, intelligence, or worth.
-
-The results are made up. The questions are ridiculous. The developer probably needs sleep.
-
-**Play with friends. Laugh at the game, not at people's identities.**
+### Option 3: GitHub Pages
+Commit and push to a GitHub repository, then enable GitHub Pages in repository settings pointing to root `/` or `/docs`. Zero build step required!
 
 ---
 
-### MADE WITH BAD DECISIONS AND JAVASCRIPT
+## 🕹️ Controls & Accessibility
 
-*First game jam. First questionable idea. Let's see how this goes.*
-
-**GAY-M OFF © 2026**
+- **Mouse / Touch:** Click buttons, answer questions, chase the runaway button.
+- **Keyboard:** Full Tab / Enter navigation through all interactive elements. Space or Enter to skip the boot screen. Esc to return from the How to Play screen.
+- **Audio:** Web Audio API sound effects are **OFF by default**; toggle anytime with the `SOUND` button in the top HUD.
+- **Reduced Motion:** Fully complies with `prefers-reduced-motion` to disable screen shaking and instant-render typewriter text.
