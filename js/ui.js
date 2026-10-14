@@ -183,15 +183,15 @@ export class UIManager {
   // QUIZ SCREEN LOGIC
   // ==========================================
   renderQuestion(questionIndex) {
-    const question = QUIZ_QUESTIONS[questionIndex];
+    const selectedQuestions = gameState.get().selectedQuestions || [];
+    const question = selectedQuestions[questionIndex] || null;
     if (!question) {
-      // Finished all 10 questions! Advance to ragebait challenges
       gameState.setPhase(GAME_PHASES.CHALLENGE);
       return;
     }
 
     if (this.cachedElements.quizStep) {
-      this.cachedElements.quizStep.textContent = `QUESTION ${String(questionIndex + 1).padStart(2, '0')} / 10`;
+      this.cachedElements.quizStep.textContent = `QUESTION ${String(questionIndex + 1).padStart(2, '0')} / ${selectedQuestions.length}`;
     }
 
     if (this.cachedElements.quizQuestionText) {
@@ -207,35 +207,29 @@ export class UIManager {
         </button>
       `).join('');
 
-      // Add listener to options
       const buttons = this.cachedElements.quizOptionsGrid.querySelectorAll('.option-btn');
       buttons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', () => {
           const idx = parseInt(btn.getAttribute('data-opt-idx'), 10);
-          this.handleOptionSelect(questionIndex, idx, question.options[idx], buttons);
+          this.handleOptionSelect(questionIndex, idx, question.options[idx], buttons, question.id);
         });
       });
     }
   }
 
-  handleOptionSelect(questionIndex, optIndex, optionData, allButtons) {
-    // Disable all options to prevent double-click / race conditions
+  handleOptionSelect(questionIndex, optIndex, optionData, allButtons, questionId) {
     allButtons.forEach(b => {
       b.disabled = true;
       b.style.pointerEvents = 'none';
     });
 
     gameAudio.playAnswerSelect();
-    gameState.recordQuestionCompletion(questionIndex, optIndex);
+    gameState.recordQuestionCompletion(questionId || questionIndex, optIndex);
     gameState.updateBroMeter(optionData.delta);
 
-    // Apply visual effects if requested
     this.triggerEffect(optionData.effect);
-
-    // Speak narrator commentary
     narrator.speak(optionData.reaction);
 
-    // Advance to next question after a brief delay
     setTimeout(() => {
       const nextIndex = questionIndex + 1;
       gameState.get().currentQuestion = nextIndex;

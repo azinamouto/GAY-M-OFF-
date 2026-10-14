@@ -46,6 +46,7 @@ class GameController {
 
   startGame() {
     gameAudio.playClick();
+    gameState.startQuestionSession();
     gameState.get().currentQuestion = 0;
     gameState.get().currentChallenge = 0;
     gameState.setPhase(GAME_PHASES.QUIZ);

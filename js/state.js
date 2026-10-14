@@ -3,6 +3,8 @@
  * Central single source of truth for the game state machine.
  */
 
+import { generateQuestionSession } from './questions.js';
+
 export const GAME_PHASES = {
   BOOT: "boot",
   MENU: "menu",
@@ -25,6 +27,7 @@ const INITIAL_STATE = {
     progressbar: 0,
     impossible: 0
   },
+  selectedQuestions: [],
   ending: null,
   soundEnabled: false,
   bootCompleted: false
@@ -64,6 +67,24 @@ class StateStore {
     this.notify("phase");
   }
 
+  startQuestionSession(randomFn = Math.random) {
+    const sessionQuestions = generateQuestionSession({ randomFn });
+    this.state.selectedQuestions = Array.isArray(sessionQuestions) ? sessionQuestions : [];
+    this.state.currentQuestion = 0;
+    this.state.completedQuestions = [];
+    this.state.completedChallenges = [];
+    this.state.challengeAttempts = {
+      runaway: 0,
+      progressbar: 0,
+      impossible: 0
+    };
+    this.state.broMeter = 50;
+    this.state.frustration = 0;
+    this.state.ending = null;
+    this.notify('selectedQuestions');
+    return this.state.selectedQuestions;
+  }
+
   updateBroMeter(delta) {
     const current = Number.isFinite(this.state.broMeter) ? this.state.broMeter : 50;
     const nextVal = Math.max(0, Math.min(100, Math.round(current + delta)));
@@ -96,11 +117,18 @@ class StateStore {
     return this.state.soundEnabled;
   }
 
-  recordQuestionCompletion(index, answerIndex) {
-    if (!this.state.completedQuestions.includes(index)) {
-      this.state.completedQuestions.push({ questionIndex: index, answerIndex });
+  recordQuestionCompletion(questionRef, answerIndex) {
+    const targetId = typeof questionRef === 'string' ? questionRef : Number.isInteger(questionRef) ? this.state.selectedQuestions[questionRef]?.id : null;
+    if (!targetId) {
+      return false;
     }
-    this.notify("completedQuestions");
+
+    const alreadyComplete = this.state.completedQuestions.some(item => item.questionId === targetId || item.questionIndex === questionRef);
+    if (!alreadyComplete) {
+      this.state.completedQuestions.push({ questionId: targetId, questionIndex: questionRef, answerIndex });
+      this.notify("completedQuestions");
+    }
+    return true;
   }
 
   recordChallengeCompletion(index) {
