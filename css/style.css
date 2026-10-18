@@ -65,3 +65,14 @@
   background: linear-gradient(90deg, var(--color-chaos-pink), var(--color-warning-yellow)) !important;
   box-shadow: 0 0 16px var(--color-warning-yellow) !important;
 }
+
+/* Poked Narrator Feedback */
+.narrator-card {
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.narrator-card.poked {
+  animation: pokedTwitch 0.3s ease;
+  border-color: var(--color-warning-yellow) !important;
+}
