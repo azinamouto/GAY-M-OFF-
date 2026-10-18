@@ -50,3 +50,13 @@
   color: var(--color-pixel-white);
   text-align: center;
 }
+
+.btn-mash-action {
+  font-family: var(--font-pixel) !important;
+  font-size: 0.85rem !important;
+  padding: 14px 22px !important;
+  cursor: pointer;
+  box-shadow: 0 0 14px var(--color-warning-yellow-glow);
+  animation: pulseButton 0.7s infinite alternate;
+  transition: transform 0.06s ease;
+}
