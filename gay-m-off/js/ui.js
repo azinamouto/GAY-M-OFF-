@@ -1,6 +1,7 @@
 /**
- * GAY-M OFF — UI Management Module
- * Screen switching, HUD updates, quiz rendering, ending screen display, and visual FX.
+ * GAY-M OFF — UI Management Module (Upgraded)
+ * Screen switching, HUD updates, quiz rendering, ending screen display, visual FX,
+ * hesitation detection, rage-click spam tracking, narrator poke interactions, and viral roast copying.
  */
 
 import { gameState, GAME_PHASES } from './state.js';
@@ -14,6 +15,8 @@ export class UIManager {
     this.currentScreen = null;
     this.challengeManager = null;
     this.cachedElements = {};
+    this.hesitationTimeout = null;
+    this.clickTimestamps = [];
   }
 
   setChallengeManager(cm) {
@@ -55,6 +58,9 @@ export class UIManager {
       endingDesc: document.getElementById('ending-desc'),
       endingBroScore: document.getElementById('ending-bro-score'),
       endingFrustration: document.getElementById('ending-frustration'),
+      endingPokes: document.getElementById('ending-pokes'),
+      endingHesitation: document.getElementById('ending-hesitation'),
+      endingReflexes: document.getElementById('ending-reflexes'),
 
       // Suspicion Banner
       suspicionBanner: document.getElementById('suspicion-banner')
@@ -62,12 +68,62 @@ export class UIManager {
 
     narrator.setTargetElement(this.cachedElements.narratorText);
 
-    // Skip typewriter on dialogue click
+    // Narrator Interaction: Skip typewriter if typing, or POKE if idle!
     if (this.cachedElements.narratorCard) {
       this.cachedElements.narratorCard.addEventListener('click', () => {
-        narrator.skipTypewriter();
+        const skipped = narrator.skipTypewriter();
+        if (!skipped) {
+          // Poke interaction!
+          gameAudio.playGlassTap();
+          gameState.state.pokesCount = (gameState.state.pokesCount || 0) + 1;
+
+          const card = this.cachedElements.narratorCard;
+          card.classList.remove('poked');
+          void card.offsetWidth; // Force CSS reflow to replay animation
+          card.classList.add('poked');
+
+          const { penalty } = narrator.poke();
+          if (penalty) {
+            gameAudio.playBuzzer();
+            gameState.updateBroMeter(-5);
+            gameState.addFrustration(1);
+            document.body.classList.add('shake-active');
+            setTimeout(() => document.body.classList.remove('shake-active'), 300);
+          }
+        }
       });
     }
+
+    // Global Rage / Spam Click Detector
+    document.addEventListener('click', () => {
+      const now = Date.now();
+      this.clickTimestamps.push(now);
+      this.clickTimestamps = this.clickTimestamps.filter(t => now - t < 850);
+
+      if (this.clickTimestamps.length >= 6) {
+        this.clickTimestamps = [];
+        gameState.state.spamClicksCount = (gameState.state.spamClicksCount || 0) + 1;
+        gameAudio.playGlitch();
+
+        const cabinet = document.querySelector('.arcade-cabinet');
+        if (cabinet) {
+          cabinet.classList.add('glitch-flash');
+          setTimeout(() => cabinet.classList.remove('glitch-flash'), 300);
+        }
+
+        if (this.cachedElements.suspicionBanner) {
+          this.cachedElements.suspicionBanner.textContent = "⚠️ AGGRESSIVE SPAM DETECTED: MOUSE CALIBRATION FAILING ⚠️";
+          this.cachedElements.suspicionBanner.classList.add('show');
+          setTimeout(() => {
+            if (this.cachedElements.suspicionBanner) {
+              this.cachedElements.suspicionBanner.classList.remove('show');
+            }
+          }, 1800);
+        }
+
+        narrator.speak('spam_click', true);
+      }
+    });
 
     // Subscribe to state updates
     gameState.subscribe((state, prop) => this.handleStateChange(state, prop));
@@ -86,7 +142,16 @@ export class UIManager {
     }
   }
 
+  clearHesitationTimer() {
+    if (this.hesitationTimeout) {
+      clearTimeout(this.hesitationTimeout);
+      this.hesitationTimeout = null;
+    }
+  }
+
   renderPhase(phase) {
+    this.clearHesitationTimer();
+
     // Hide all screens
     const screens = [
       this.cachedElements.screenBoot,
@@ -137,7 +202,6 @@ export class UIManager {
     if (targetScreen) {
       targetScreen.classList.add('active');
       targetScreen.setAttribute('aria-hidden', 'false');
-      // Set accessible focus
       const focusTarget = targetScreen.querySelector('button, [tabindex="0"], h1, h2');
       if (focusTarget) {
         focusTarget.focus();
@@ -180,23 +244,43 @@ export class UIManager {
   }
 
   // ==========================================
-  // QUIZ SCREEN LOGIC
+  // QUIZ SCREEN LOGIC (UPGRADED)
   // ==========================================
   renderQuestion(questionIndex) {
-    const question = QUIZ_QUESTIONS[questionIndex];
+    this.clearHesitationTimer();
+
+    const selectedQuestions = gameState.get().selectedQuestions || [];
+    const question = selectedQuestions[questionIndex] || null;
     if (!question) {
-      // Finished all 10 questions! Advance to ragebait challenges
       gameState.setPhase(GAME_PHASES.CHALLENGE);
       return;
     }
 
     if (this.cachedElements.quizStep) {
-      this.cachedElements.quizStep.textContent = `QUESTION ${String(questionIndex + 1).padStart(2, '0')} / 10`;
+      this.cachedElements.quizStep.textContent = `QUESTION ${String(questionIndex + 1).padStart(2, '0')} / ${selectedQuestions.length}`;
     }
 
     if (this.cachedElements.quizQuestionText) {
       this.cachedElements.quizQuestionText.textContent = question.text;
     }
+
+    // Set Inactivity / Hesitation Roast Timer (8.5 seconds)
+    this.hesitationTimeout = setTimeout(() => {
+      if (gameState.get().phase === GAME_PHASES.QUIZ) {
+        gameState.state.hesitationsCount = (gameState.state.hesitationsCount || 0) + 1;
+        narrator.speak('hesitation', true);
+
+        if (this.cachedElements.suspicionBanner) {
+          this.cachedElements.suspicionBanner.textContent = "⚠️ OVERTHINKING DETECTED: BRO INTUITION DEGRADING ⚠️";
+          this.cachedElements.suspicionBanner.classList.add('show');
+          setTimeout(() => {
+            if (this.cachedElements.suspicionBanner) {
+              this.cachedElements.suspicionBanner.classList.remove('show');
+            }
+          }, 2000);
+        }
+      }
+    }, 8500);
 
     if (this.cachedElements.quizOptionsGrid) {
       const keys = ['A', 'B', 'C', 'D'];
@@ -207,35 +291,44 @@ export class UIManager {
         </button>
       `).join('');
 
-      // Add listener to options
       const buttons = this.cachedElements.quizOptionsGrid.querySelectorAll('.option-btn');
-      buttons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const idx = parseInt(btn.getAttribute('data-opt-idx'), 10);
-          this.handleOptionSelect(questionIndex, idx, question.options[idx], buttons);
+      buttons.forEach((btn, idx) => {
+        // Option bait jitter on suspicious/unhinged questions
+        if (question.tier === 'unhinged' && (idx === 1 || idx === 2)) {
+          let jittered = false;
+          btn.addEventListener('mouseenter', () => {
+            if (!jittered) {
+              jittered = true;
+              btn.classList.add('option-dodge');
+              setTimeout(() => btn.classList.remove('option-dodge'), 350);
+            }
+          });
+        }
+
+        btn.addEventListener('click', () => {
+          this.clearHesitationTimer();
+          const optIdx = parseInt(btn.getAttribute('data-opt-idx'), 10);
+          this.handleOptionSelect(questionIndex, optIdx, question.options[optIdx], buttons, question.id);
         });
       });
     }
   }
 
-  handleOptionSelect(questionIndex, optIndex, optionData, allButtons) {
-    // Disable all options to prevent double-click / race conditions
+  handleOptionSelect(questionIndex, optIndex, optionData, allButtons, questionId) {
+    this.clearHesitationTimer();
+
     allButtons.forEach(b => {
       b.disabled = true;
       b.style.pointerEvents = 'none';
     });
 
     gameAudio.playAnswerSelect();
-    gameState.recordQuestionCompletion(questionIndex, optIndex);
+    gameState.recordQuestionCompletion(questionId || questionIndex, optIndex);
     gameState.updateBroMeter(optionData.delta);
 
-    // Apply visual effects if requested
     this.triggerEffect(optionData.effect);
-
-    // Speak narrator commentary
     narrator.speak(optionData.reaction);
 
-    // Advance to next question after a brief delay
     setTimeout(() => {
       const nextIndex = questionIndex + 1;
       gameState.get().currentQuestion = nextIndex;
@@ -255,6 +348,7 @@ export class UIManager {
       setTimeout(() => cabinet && cabinet.classList.remove('glitch-flash'), 300);
     } else if (effectType === 'suspicion') {
       if (this.cachedElements.suspicionBanner) {
+        this.cachedElements.suspicionBanner.textContent = "⚠️ SUSPICION DETECTED: BRO PROTOCOL ANOMALY RECORDED ⚠️";
         this.cachedElements.suspicionBanner.classList.add('show');
         setTimeout(() => {
           if (this.cachedElements.suspicionBanner) {
@@ -269,6 +363,8 @@ export class UIManager {
   // CHALLENGE PHASE
   // ==========================================
   startChallengePhase(challengeIndex) {
+    this.clearHesitationTimer();
+
     const titles = [
       "CHALLENGE A: THE RUNAWAY BUTTON",
       "CHALLENGE B: THE FAKE PROGRESS BAR",
@@ -289,13 +385,15 @@ export class UIManager {
   }
 
   advanceToEndings() {
+    this.clearHesitationTimer();
     gameState.setPhase(GAME_PHASES.ENDING);
   }
 
   // ==========================================
-  // ENDING SCREEN RENDERING
+  // ENDING SCREEN RENDERING & VIRAL ROAST COPY
   // ==========================================
   renderEndingScreen() {
+    this.clearHesitationTimer();
     const state = gameState.get();
     const ending = evaluateEnding(state);
     gameState.setEnding(ending.id);
@@ -320,8 +418,85 @@ export class UIManager {
     if (this.cachedElements.endingFrustration) {
       this.cachedElements.endingFrustration.textContent = `${state.frustration} pts`;
     }
+    if (this.cachedElements.endingPokes) {
+      this.cachedElements.endingPokes.textContent = `${state.pokesCount || 0}`;
+    }
+    if (this.cachedElements.endingHesitation) {
+      this.cachedElements.endingHesitation.textContent = `${state.hesitationsCount || 0}`;
+    }
+
+    // Determine humorous reflex rating
+    let reflexRank = "Standard Issue Bro";
+    const runawayAttempts = state.challengeAttempts?.runaway || 0;
+    if (runawayAttempts >= 6 || (state.hesitationsCount || 0) >= 3) {
+      reflexRank = "Sloth Tier (Questionable)";
+    } else if ((state.spamClicksCount || 0) >= 2 || (state.mashCount || 0) >= 15) {
+      reflexRank = "Panic Masher (Unhinged)";
+    } else if ((state.pokesCount || 0) >= 4) {
+      reflexRank = "Glass Tapper Gremlin";
+    }
+
+    if (this.cachedElements.endingReflexes) {
+      this.cachedElements.endingReflexes.textContent = reflexRank;
+    }
 
     narrator.speak(ending.narratorKey, true);
+  }
+
+  copyRoastToClipboard() {
+    const state = gameState.get();
+    const ending = evaluateEnding(state);
+
+    const roastText = 
+`🎮 GAY-M OFF ARCHIVE REPORT 🎮
+Result: ${ending.title}
+Bro Meter: ${state.broMeter}%
+Frustration Score: ${state.frustration} pts
+Glass Taps (Pokes): ${state.pokesCount || 0}
+Overthinking Incidents: ${state.hesitationsCount || 0}
+Verdict: "${ending.quote}"
+
+"Your choices are questionable. The game is worse."
+Can your friendship survive the interrogation? 🔥🕹️`;
+
+    const showSuccessToast = () => {
+      gameAudio.playChallengeComplete();
+      if (this.cachedElements.suspicionBanner) {
+        this.cachedElements.suspicionBanner.textContent = "📋 ROAST COPIED TO CLIPBOARD! GO EMBARRASS YOURSELF.";
+        this.cachedElements.suspicionBanner.classList.add('show');
+        setTimeout(() => {
+          if (this.cachedElements.suspicionBanner) {
+            this.cachedElements.suspicionBanner.classList.remove('show');
+          }
+        }, 2500);
+      }
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(roastText).then(showSuccessToast).catch(() => {
+        this.fallbackCopy(roastText, showSuccessToast);
+      });
+    } else {
+      this.fallbackCopy(roastText, showSuccessToast);
+    }
+  }
+
+  fallbackCopy(text, callback) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    textArea.style.top = '0';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      if (callback) callback();
+    } catch (err) {
+      console.warn("Fallback copy failed:", err);
+    }
+    document.body.removeChild(textArea);
   }
 }
 
