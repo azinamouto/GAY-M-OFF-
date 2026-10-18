@@ -70,6 +70,30 @@ const DIALOGUE_POOLS = {
   restart: [
     "Back for more? Hope you stretched your patience.",
     "Resetting memory banks. Pretending this never happened."
+  ],
+  hesitation: [
+    "Take your time. We know this requires intense moral deliberation.",
+    "Bro is writing a 5-page dissertation on a 4-choice quiz.",
+    "The cabinet has aged 3 days waiting for your cursor.",
+    "Did your browser freeze or did your confidence just collapse?"
+  ],
+  spam_click: [
+    "Aggressive clicking will not validate your life choices, babe.",
+    "Your left mouse button is filing a restraining order.",
+    "Spamming won't change the algorithm. Calm down."
+  ],
+  mash_prompt: [
+    "BRO FREQUENCY COMPROMISED! MASH THE RESTORE BUTTON OR DIE OF SHAME!",
+    "EMERGENCY PROTOCOL: SPAM SPACEBAR OR CLICK TO RECHARGE!"
+  ],
+  overcharge: [
+    "WARNING: Bro frequency at 104%! System overcharged with raw chaotic energy!",
+    "You mashed so hard the cabinet almost filed for bankruptcy."
+  ],
+  fake_clone: [
+    "That was a decoy clone, genius.",
+    "You fell for the oldest trick in the 8-bit book.",
+    "Wrong button. Your spatial awareness is deeply concerning."
   ]
 };
 
@@ -80,10 +104,40 @@ class NarratorEngine {
     this.typewriterInterval = null;
     this.isTyping = false;
     this.targetElement = null;
+    this.pokeCount = 0;
   }
 
   setTargetElement(el) {
     this.targetElement = el;
+  }
+
+  resetPoke() {
+    this.pokeCount = 0;
+  }
+
+  poke() {
+    this.pokeCount++;
+    let msg = "";
+    let penalty = false;
+
+    if (this.pokeCount === 1) {
+      msg = "Ow. Why are you poking the screen?";
+    } else if (this.pokeCount === 2) {
+      msg = "I am digital code. You are literally tapping glass.";
+    } else if (this.pokeCount === 3) {
+      msg = "Do you tap your bros like this? Don't answer that.";
+    } else if (this.pokeCount === 4) {
+      msg = "Touch this cabinet again and see what happens to your score.";
+    } else if (this.pokeCount === 5) {
+      msg = "PENALTY: -5 Bro Points for unsolicited glass tapping.";
+      penalty = true;
+    } else {
+      msg = `Another poke, another deduction (${this.pokeCount} taps). Glutton for punishment (-5).`;
+      penalty = true;
+    }
+
+    this.speak(msg);
+    return { pokeCount: this.pokeCount, penalty };
   }
 
   getRandomLine(category) {
