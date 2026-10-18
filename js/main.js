@@ -46,6 +46,7 @@ class GameController {
 
   startGame() {
     gameAudio.playClick();
+    narrator.resetPoke();
     gameState.startQuestionSession();
     gameState.get().currentQuestion = 0;
     gameState.get().currentChallenge = 0;
@@ -55,6 +56,7 @@ class GameController {
 
   restartGame() {
     gameAudio.playClick();
+    narrator.resetPoke();
     if (this.challengeManager) {
       this.challengeManager.cleanupCurrentChallenge();
     }
@@ -96,6 +98,11 @@ class GameController {
           if (enabled) {
             gameAudio.playClick();
           }
+          break;
+
+        case 'copy-roast':
+          gameAudio.playClick();
+          ui.copyRoastToClipboard();
           break;
 
         case 'play-again':
