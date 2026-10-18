@@ -60,3 +60,8 @@
   animation: pulseButton 0.7s infinite alternate;
   transition: transform 0.06s ease;
 }
+
+.fake-bar-fill.overcharged {
+  background: linear-gradient(90deg, var(--color-chaos-pink), var(--color-warning-yellow)) !important;
+  box-shadow: 0 0 16px var(--color-warning-yellow) !important;
+}
