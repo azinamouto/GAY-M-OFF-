@@ -888,3 +888,95 @@ body.shake-active .arcade-cabinet {
 .suspicion-banner.show {
   display: block;
 }
+
+/* ============================================================
+   Ragebait Upgrades & Troll VFX
+   ============================================================ */
+
+/* Decoy Clones in Challenge A */
+.decoy-target-btn {
+  position: absolute;
+  font-family: var(--font-pixel);
+  font-size: 0.7rem;
+  padding: 10px 14px;
+  background-color: var(--color-void-elevated);
+  color: var(--color-warning-yellow);
+  border: 2px dashed var(--color-warning-yellow);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  transition: transform 0.1s ease;
+  z-index: 5;
+}
+
+.decoy-target-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Challenge B Panic Mash QTE */
+.qte-panic-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background-color: rgba(255, 79, 156, 0.12);
+  border: 2px dashed var(--color-chaos-pink);
+  border-radius: 4px;
+  box-shadow: var(--shadow-pink);
+  width: 100%;
+  max-width: 440px;
+}
+
+.qte-panic-title {
+  font-family: var(--font-pixel);
+  font-size: 0.75rem;
+  color: var(--color-warning-yellow);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.qte-panic-sub {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-pixel-white);
+  text-align: center;
+}
+
+.btn-mash-action {
+  font-family: var(--font-pixel) !important;
+  font-size: 0.85rem !important;
+  padding: 14px 22px !important;
+  cursor: pointer;
+  box-shadow: 0 0 14px var(--color-warning-yellow-glow);
+  animation: pulseButton 0.7s infinite alternate;
+  transition: transform 0.06s ease;
+}
+
+.fake-bar-fill.overcharged {
+  background: linear-gradient(90deg, var(--color-chaos-pink), var(--color-warning-yellow)) !important;
+  box-shadow: 0 0 16px var(--color-warning-yellow) !important;
+}
+
+/* Poked Narrator Feedback */
+.narrator-card {
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.narrator-card.poked {
+  animation: pokedTwitch 0.3s ease;
+  border-color: var(--color-warning-yellow) !important;
+}
+
+/* Option Hover Jitter */
+.option-dodge {
+  animation: optionJitter 0.35s ease;
+}
+
+/* Rejected Impossible Option */
+.btn-impossible-opt.rejected {
+  background-color: rgba(255, 79, 156, 0.3) !important;
+  border-color: var(--color-chaos-pink) !important;
+}
