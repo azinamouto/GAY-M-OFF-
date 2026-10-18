@@ -8,4 +8,13 @@
     } catch (e) {}
   }
 
+  playGlassTap() {
+    if (!this.enabled || !this.ctx) return;
+    try {
+      this.resume();
+      this.playTone(1450, 'sine', 0.04, 0.15);
+      setTimeout(() => this.playTone(1800, 'triangle', 0.05, 0.1), 25);
+    } catch (e) {}
+  }
+
   playChallengeComplete() {    if (!this.enabled || !this.ctx) return;    try {      this.resume();      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6      notes.forEach((freq, idx) => {        setTimeout(() => {          this.playTone(freq, 'triangle', 0.12, 0.14);        }, idx * 75);      });    } catch (e) {}  }  playFinalVerdict() {    if (!this.enabled || !this.ctx) return;    try {      this.resume();      const chords = [330, 415.3, 493.88];      chords.forEach((freq) => {        this.playTone(freq, 'sawtooth', 0.6, 0.1);      });    } catch (e) {}  }}export const gameAudio = new RetroAudioSystem();
