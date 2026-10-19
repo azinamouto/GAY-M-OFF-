@@ -125,20 +125,21 @@ The game uses a centralized state system, controlled screen transitions, and pro
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/gay-m-off.git
-cd gay-m-off
+git clone https://github.com/azinamouto/GAY-M-OFF-.git
+cd GAY-M-OFF-
 ```
 
-Start a local server using Python:
+To use the Vite development server, install the project dependencies and start it from the repository root:
+
+```bash
+npm install
+npm run dev
+```
+
+Alternatively, serve the files with Python:
 
 ```bash
 python -m http.server 8000
-```
-
-Or use Node.js:
-
-```bash
-npx serve .
 ```
 
 Open the local address printed in your terminal. For the Python command above, that's:
