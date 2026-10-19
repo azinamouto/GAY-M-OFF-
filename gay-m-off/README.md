@@ -55,12 +55,7 @@ npx serve .
 ```
 Then navigate to `http://localhost:8000`.
 
-### Option 2: Vite Dev Server (AI Studio environment)
-```bash
-npm run dev
-```
-
-### Option 3: GitHub Pages
+### Option 2: GitHub Pages
 Commit and push to a GitHub repository, then enable GitHub Pages in repository settings pointing to root `/` or `/docs`. Zero build step required!
 
 ---
