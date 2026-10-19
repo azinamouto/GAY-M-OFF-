@@ -355,6 +355,7 @@ export class ChallengeManager {
 
       const onKeyDown = (e) => {
         if (e.code === 'Space' || e.key === ' ') {
+          if (e.repeat || (e.target instanceof Node && mashBtn?.contains(e.target))) return;
           e.preventDefault();
           handleMash();
         }
