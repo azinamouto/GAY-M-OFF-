@@ -35,6 +35,7 @@ export class UIManager {
 
       // HUD
       broMeterFill: document.getElementById('bro-meter-fill'),
+      broMeter: document.querySelector('.bro-meter-outer'),
       broMeterStatus: document.getElementById('bro-meter-status'),
       soundToggleBtn: document.getElementById('btn-sound-toggle'),
 
@@ -216,6 +217,10 @@ export class UIManager {
 
   updateBroMeter(val) {
     const clamped = Math.max(0, Math.min(100, Math.round(val)));
+    if (this.cachedElements.broMeter) {
+      this.cachedElements.broMeter.setAttribute('aria-valuenow', String(clamped));
+      this.cachedElements.broMeter.setAttribute('aria-valuetext', `${clamped}%`);
+    }
     if (this.cachedElements.broMeterFill) {
       this.cachedElements.broMeterFill.style.width = `${clamped}%`;
     }
