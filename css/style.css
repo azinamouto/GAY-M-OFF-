@@ -204,6 +204,7 @@ body {
 
 /* Audio button & HUD Action buttons */
 .btn-pixel-hud {
+  min-height: 44px;
   font-family: var(--font-pixel);
   font-size: 0.65rem;
   background: var(--color-void-elevated);
