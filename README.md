@@ -83,6 +83,7 @@ If you're the kind of person who clones random repositories from strangers, cong
 - Node.js 20.19+ or 22.12+
 - npm
 - A modern web browser
+- Python 3 (optional, for the static-server option)
 - A reasonable amount of patience
 
 ### Installation
