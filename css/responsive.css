@@ -51,6 +51,16 @@
     gap: 10px;
   }
 
+  .quiz-header {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .quiz-warning-pill {
+    margin-left: auto;
+  }
+
   .options-grid {
     grid-template-columns: 1fr;
     gap: 10px;
