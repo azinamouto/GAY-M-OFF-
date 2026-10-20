@@ -62,6 +62,7 @@ export class UIManager {
       endingDesc: document.getElementById('ending-desc'),
       endingBroScore: document.getElementById('ending-bro-score'),
       endingQuestions: document.getElementById('ending-questions'),
+      endingChallengeAttempts: document.getElementById('ending-challenge-attempts'),
       endingFrustration: document.getElementById('ending-frustration'),
       endingPokes: document.getElementById('ending-pokes'),
       endingHesitation: document.getElementById('ending-hesitation'),
@@ -443,6 +444,10 @@ export class UIManager {
     if (this.cachedElements.endingQuestions) {
       this.cachedElements.endingQuestions.textContent = `${state.completedQuestions.length} / ${state.selectedQuestions.length}`;
     }
+    const challengeAttempts = Object.values(state.challengeAttempts || {}).reduce((total, attempts) => total + attempts, 0);
+    if (this.cachedElements.endingChallengeAttempts) {
+      this.cachedElements.endingChallengeAttempts.textContent = String(challengeAttempts);
+    }
     if (this.cachedElements.endingFrustration) {
       this.cachedElements.endingFrustration.textContent = `${state.frustration} pts`;
     }
@@ -480,6 +485,7 @@ export class UIManager {
 Result: ${ending.title}
 Bro Meter: ${state.broMeter}%
 Questions Answered: ${state.completedQuestions.length} / ${state.selectedQuestions.length}
+Challenge Attempts: ${Object.values(state.challengeAttempts || {}).reduce((total, attempts) => total + attempts, 0)}
 Frustration Score: ${state.frustration} pts
 Glass Taps (Pokes): ${state.pokesCount || 0}
 Overthinking Incidents: ${state.hesitationsCount || 0}
