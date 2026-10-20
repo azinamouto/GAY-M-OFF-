@@ -32,6 +32,11 @@
     font-size: 0.95rem;
   }
 
+  .menu-run-stats span,
+  .menu-run-tip {
+    font-size: 0.45rem;
+  }
+
   .hud-meter-status {
     min-width: 100px;
     font-size: 0.55rem;

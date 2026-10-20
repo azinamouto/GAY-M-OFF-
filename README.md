@@ -68,15 +68,7 @@ We're annoying, not incompetent.
 
 ## Screenshots
 
-*Screenshots are coming once the interface is ready.*
-
-For now, imagine a retro arcade machine having a personal disagreement with you.
-
-The visual direction uses dark backgrounds, pink accents, pixel-inspired elements, and deliberately dramatic interactions.
-
-Yes, it's pink.
-
-No, we're not changing it.
+The interface leans into dark arcade cabinets, pink accents, pixel-inspired details, and deliberately dramatic interactions. The main menu previews the run: ten shuffled questions, three rage challenges, and three possible endings.
 
 ---
 
@@ -167,16 +159,16 @@ A small browser game that doesn't require an entire technology company to run.
 
 ## Development status
 
-This is an experimental project under active development.
+This is an experimental project under active development. The core game loop is playable; deployment and final game-jam submission are still ahead.
 
 | Milestone | Status |
 |:--|:--|
 | Game concept and identity | Complete |
 | Initial JavaScript architecture | Complete |
-| Full quiz experience | In progress |
-| Three playable challenges | Planned / in progress |
-| Audio and animation polish | Planned |
-| Responsive and accessibility testing | Planned |
+| Full quiz experience | Implemented |
+| Three playable challenges | Implemented |
+| Audio and animation effects | Implemented |
+| Responsive layout and accessibility features | Implemented; ongoing testing |
 | Public playable deployment | Not yet published |
 | Game jam submission | Pending |
 
