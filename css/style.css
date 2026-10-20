@@ -557,6 +557,12 @@ body {
   color: var(--color-warning-yellow);
 }
 
+.quiz-category {
+  color: var(--color-arcade-purple);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .quiz-warning-pill {
   font-family: var(--font-pixel);
   font-size: 0.6rem;

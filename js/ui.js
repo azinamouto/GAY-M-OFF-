@@ -45,6 +45,7 @@ export class UIManager {
 
       // Quiz Elements
       quizStep: document.getElementById('quiz-step'),
+      quizCategory: document.getElementById('quiz-category'),
       quizQuestionText: document.getElementById('quiz-question-text'),
       quizOptionsGrid: document.getElementById('quiz-options-grid'),
 
@@ -270,6 +271,10 @@ export class UIManager {
 
     if (this.cachedElements.quizStep) {
       this.cachedElements.quizStep.textContent = `QUESTION ${String(questionIndex + 1).padStart(2, '0')} / ${selectedQuestions.length}`;
+    }
+
+    if (this.cachedElements.quizCategory) {
+      this.cachedElements.quizCategory.textContent = question.category;
     }
 
     if (this.cachedElements.quizQuestionText) {
