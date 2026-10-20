@@ -501,16 +501,29 @@ Can your friendship survive the interrogation? 🔥🕹️`;
       }
     };
 
+    const showCopyFailure = () => {
+      if (this.cachedElements.suspicionBanner) {
+        this.cachedElements.suspicionBanner.textContent = "COPY FAILED. CHECK YOUR BROWSER PERMISSIONS.";
+        this.cachedElements.suspicionBanner.classList.add('show');
+        setTimeout(() => this.cachedElements.suspicionBanner?.classList.remove('show'), 2500);
+      }
+    };
+    const tryFallbackCopy = () => {
+      if (this.fallbackCopy(roastText)) {
+        showSuccessToast();
+      } else {
+        showCopyFailure();
+      }
+    };
+
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(roastText).then(showSuccessToast).catch(() => {
-        this.fallbackCopy(roastText, showSuccessToast);
-      });
+      navigator.clipboard.writeText(roastText).then(showSuccessToast).catch(tryFallbackCopy);
     } else {
-      this.fallbackCopy(roastText, showSuccessToast);
+      tryFallbackCopy();
     }
   }
 
-  fallbackCopy(text, callback) {
+  fallbackCopy(text) {
     const textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.style.position = 'fixed';
@@ -519,13 +532,15 @@ Can your friendship survive the interrogation? 🔥🕹️`;
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
+    let copied = false;
     try {
-      document.execCommand('copy');
-      if (callback) callback();
+      copied = document.execCommand('copy');
     } catch (err) {
       console.warn("Fallback copy failed:", err);
+    } finally {
+      textArea.remove();
     }
-    document.body.removeChild(textArea);
+    return copied;
   }
 }
 
