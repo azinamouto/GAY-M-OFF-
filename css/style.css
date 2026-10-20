@@ -257,6 +257,7 @@ body {
 }
 
 .narrator-card {
+  width: 100%;
   background-color: var(--color-void);
   border: 3px solid var(--color-arcade-purple);
   box-shadow: var(--shadow-pixel);
@@ -266,6 +267,9 @@ body {
   gap: 14px;
   align-items: flex-start;
   cursor: pointer;
+  color: inherit;
+  font: inherit;
+  text-align: left;
 }
 
 .narrator-card:focus-visible {

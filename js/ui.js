@@ -98,12 +98,6 @@ export class UIManager {
           }
         }
       });
-      narratorCard.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          narratorCard.click();
-        }
-      });
     }
 
     // Global Rage / Spam Click Detector
