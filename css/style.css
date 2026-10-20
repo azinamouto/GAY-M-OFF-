@@ -572,6 +572,9 @@ body {
 }
 
 .quiz-category {
+  padding: 3px 6px;
+  border: 1px solid rgba(167, 139, 250, 0.55);
+  background-color: rgba(167, 139, 250, 0.1);
   color: var(--color-arcade-purple);
   font-size: 0.8rem;
   font-weight: 700;
