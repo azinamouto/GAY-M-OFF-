@@ -283,6 +283,7 @@ export class UIManager {
     if (this.cachedElements.quizProgress) {
       this.cachedElements.quizProgress.setAttribute('aria-valuemax', String(selectedQuestions.length));
       this.cachedElements.quizProgress.setAttribute('aria-valuenow', String(questionIndex + 1));
+      this.cachedElements.quizProgress.setAttribute('aria-valuetext', `Question ${questionIndex + 1} of ${selectedQuestions.length}`);
     }
     if (this.cachedElements.quizProgressFill) {
       const progress = ((questionIndex + 1) / selectedQuestions.length) * 100;
