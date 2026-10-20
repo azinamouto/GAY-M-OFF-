@@ -170,6 +170,14 @@ Keyboard navigation, touch-friendly controls, optional audio, and reduced-motion
 
 A small browser game that doesn't require an entire technology company to run.
 
+## Controls and accessibility
+
+- Use Tab to move between controls and Enter or Space to activate them.
+- Space also skips the boot screen and mashes during the loading challenge.
+- Press Escape on the instructions screen to return to the menu.
+- Sound effects start off and can be toggled from the HUD.
+- Animations honor your device's reduced-motion preference.
+
 ---
 
 ## Development status
