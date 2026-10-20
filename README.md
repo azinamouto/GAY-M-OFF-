@@ -80,7 +80,7 @@ If you're the kind of person who clones random repositories from strangers, cong
 
 ### Requirements
 
-- Node.js
+- Node.js 20.19+ or 22.12+
 - npm
 - A modern web browser
 - A reasonable amount of patience
