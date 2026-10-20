@@ -60,6 +60,11 @@ button {
   user-select: none;
 }
 
+::selection {
+  background-color: var(--color-chaos-pink);
+  color: var(--color-void);
+}
+
 /* Background grid and ambient arcade glow */
 body {
   background-image: 
