@@ -50,6 +50,8 @@ Your answers influence the game's reactions and its completely unqualified final
 
 And just when you think you're making progress, the game throws something stupid at you.
 
+Question history is stored in your browser to vary future runs. Your answers stay in the current game session; the game has no account or game server.
+
 ### Meet the problems
 
 | Challenge | Description |
