@@ -138,6 +138,8 @@ Just the essentials.
 
 The project is organized into separate modules for questions, challenges, state, audio, narration, and UI behavior.
 
+Display fonts load from Google Fonts when available and fall back to system fonts if offline.
+
 Because messy code is only funny when it belongs to somebody else.
 
 ---
