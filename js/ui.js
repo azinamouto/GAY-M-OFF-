@@ -340,6 +340,7 @@ export class UIManager {
           this.handleOptionSelect(questionIndex, optIdx, question.options[optIdx], buttons, question.id);
         });
       });
+      buttons[0]?.focus();
     }
   }
 
