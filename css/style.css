@@ -1080,4 +1080,9 @@ body.shake-active .arcade-cabinet {
   .narrator-card {
     border-color: ButtonText;
   }
+
+  .bro-meter-fill,
+  .quiz-progress-fill {
+    background: Highlight;
+  }
 }
