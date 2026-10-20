@@ -71,7 +71,8 @@ export class UIManager {
 
     // Narrator Interaction: Skip typewriter if typing, or POKE if idle!
     if (this.cachedElements.narratorCard) {
-      this.cachedElements.narratorCard.addEventListener('click', () => {
+      const narratorCard = this.cachedElements.narratorCard;
+      narratorCard.addEventListener('click', () => {
         const skipped = narrator.skipTypewriter();
         if (!skipped) {
           // Poke interaction!
@@ -91,6 +92,12 @@ export class UIManager {
             document.body.classList.add('shake-active');
             setTimeout(() => document.body.classList.remove('shake-active'), 300);
           }
+        }
+      });
+      narratorCard.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          narratorCard.click();
         }
       });
     }

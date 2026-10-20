@@ -258,6 +258,11 @@ body {
   cursor: pointer;
 }
 
+.narrator-card:focus-visible {
+  outline: 3px solid var(--color-warning-yellow);
+  outline-offset: 3px;
+}
+
 .narrator-avatar {
   width: 44px;
   height: 44px;
