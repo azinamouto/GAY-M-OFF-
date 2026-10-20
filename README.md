@@ -1,236 +1,233 @@
- <div align="center">
-
 # GAY-M OFF
+
+<div align="center">
 
 ### pretty in pink. questionable by design.
 
-*Your choices are questionable. The game is worse.*
+**A psychological troll game for people who think they're difficult to annoy.**
 
+*Spoiler: you're probably not.*
+
+![JavaScript](https://img.shields.io/badge/JavaScript-11101B?style=flat-square&logo=javascript&logoColor=FF4F9C)
 ![HTML5](https://img.shields.io/badge/HTML5-11101B?style=flat-square&logo=html5&logoColor=FF4F9C)
 ![CSS3](https://img.shields.io/badge/CSS3-11101B?style=flat-square&logo=css&logoColor=FF4F9C)
-![JavaScript](https://img.shields.io/badge/JavaScript-11101B?style=flat-square&logo=javascript&logoColor=FF4F9C)
-![Game Off](https://img.shields.io/badge/GAME_OFF_2026-FF4F9C?style=flat-square&labelColor=11101B&color=FF4F9C)
-![Status](https://img.shields.io/badge/STATUS-IN_DEVELOPMENT-FF4F9C?style=flat-square&labelColor=11101B)
+![Game Off](https://img.shields.io/badge/GAME_OFF-2026-FF4F9C?style=flat-square&labelColor=11101B)
+![Status](https://img.shields.io/badge/STATUS-IN_DEVELOPMENT-A78BFA?style=flat-square&labelColor=11101B)
 
-<br>
-
-**A little pink. A little pixelated. A lot of bad decisions.**
+[**Repository**](https://github.com/azinamouto/GAY-M-OFF-) · [**Report an Issue**](https://github.com/azinamouto/GAY-M-OFF-/issues)
 
 </div>
 
 ---
 
-## 01. hello, gorgeous.
+## What the hell is GAY-M OFF?
 
-Welcome to **GAY-M OFF**, a browser-based psychological troll quiz disguised as a perfectly innocent arcade game.
+It's a browser game.
 
-Ten questionable questions. Three unnecessarily frustrating challenges. One narrator who seriously needs to mind their business.
+You answer questions. The game judges you. You question why you're still playing.
 
-It's cute. It's chaotic. It's probably judging you right now.
+That's pretty much it.
 
-Built with vanilla HTML, CSS, and JavaScript for **GitHub Game Off 2026**, because apparently learning game development wasn't stressful enough.
+**GAY-M OFF** is a deliberately annoying, pink-themed arcade quiz built to test your patience, your decision-making, and your ability to tolerate a narrator who thinks they're funnier than you.
 
-> **A friendly warning:** The game doesn't know you. It doesn't know your secrets. It just likes making things unnecessarily difficult.
+There's no deep psychological analysis here. No meaningful personality assessment. No revolutionary artificial intelligence.
+
+It's literally JavaScript making fun of you.
+
+And somehow, you're still reading.
+
+The game is being developed as an experimental entry for **GitHub Game Off 2026**.
 
 ---
 
-## 02. the game is not your friend.
+## Gameplay
 
-### the interrogation
+You get ten questions per run, drawn from a larger question pool.
 
-*Ten questions. Zero correct answers. Endless judgment.*
+Some are ridiculous. Some make absolutely no sense. A few might genuinely make you reconsider your friendships.
 
-A collection of ridiculous questions about friendship, bro codes, and suspiciously specific situations.
+Your answers influence the game's reactions and its completely unqualified final verdict.
 
-Every answer comes with consequences. Sometimes it's a sarcastic comment. Sometimes the screen shakes. Sometimes the game just decides you're wrong.
+And just when you think you're making progress, the game throws something stupid at you.
 
-Don't take it personally. The narrator is mean to everyone.
+### Meet the problems
 
-### the emotional damage department
-
-Three challenges designed to test your patience more than your actual gaming skills.
-
-| Challenge | What you're dealing with |
+| Challenge | Description |
 |:--|:--|
-| **01 / catch me if you can** | A button that runs away from your cursor. She's shy, apparently. |
-| **02 / almost there, babe** | A progress bar that reaches 99%, changes her mind, and starts over. |
-| **03 / wrong again, sweetheart** | A question that refuses your answers until it finally gets tired of you. |
+| **The Interrogation** | Ten questions. Multiple choices. Not a single respectable outcome. |
+| **Catch Me If You Can** | A button that runs away from your cursor. Even a button doesn't want you. |
+| **Almost There** | A progress bar reaches 99%, then resets. Your trust issues are now justified. |
+| **Wrong Again** | Every answer is wrong. Including the one you're absolutely sure about. |
+| **The Final Verdict** | The game evaluates your performance using a system of entirely made-up nonsense. |
 
-Everything is beatable. Eventually.
+Don't worry. Every challenge is designed to be beatable.
 
-We're annoying, not evil.
-
----
-
-## 03. dressed in pink, coded in chaos.
-
-The entire game runs on plain web technologies. No frameworks, no backend, no mysterious dependencies.
-
-Just a browser and some questionable JavaScript.
-
-| Technology | Responsibility |
-|:--|:--|
-| `HTML5` | Structure and arcade layout |
-| `CSS3` | Pixel-inspired styling, responsiveness, and animations |
-| `JavaScript ES6+` | Game logic, interactions, and state management |
-| `Web Audio API` | Retro sound effects, because silence is awkward |
-
-### the color situation
-
-| Color | Hex | Purpose |
-|:--|:--|:--|
-| Chaos Pink | `#FF4F9C` | Main accent |
-| Void Black | `#11101B` | Background |
-| Arcade Purple | `#A78BFA` | Secondary details |
-| Warning Yellow | `#F9E86D` | Alerts and surprises |
-| Pixel White | `#F6F3FF` | Text and contrast |
-
-Cute colors. Hostile gameplay. Perfect balance.
+We're annoying, not incompetent.
 
 ---
 
-## 04. what's inside her head?
+## Screenshots
 
-```text
-gay-m-off/
-│
-├── index.html
-│
-├── css/
-│   ├── style.css
-│   ├── animations.css
-│   └── responsive.css
-│
-├── js/
-│   ├── main.js
-│   ├── state.js
-│   ├── questions.js
-│   ├── challenges.js
-│   ├── narrator.js
-│   ├── endings.js
-│   ├── audio.js
-│   └── ui.js
-│
-└── README.md
-```
+*Screenshots are coming once the interface is ready.*
 
-The code is separated by responsibility because even chaos deserves a little organization.
+For now, imagine a retro arcade machine having a personal disagreement with you.
 
-The game uses a centralized state system, controlled screen transitions, and proper event cleanup so the trolling stays inside the game instead of breaking the application.
+The visual direction uses dark backgrounds, pink accents, pixel-inspired elements, and deliberately dramatic interactions.
+
+Yes, it's pink.
+
+No, we're not changing it.
 
 ---
 
-## 05. wanna play?
+## Run it locally
 
-Clone the repository:
+If you're the kind of person who clones random repositories from strangers, congratulations. You're exactly our target audience.
+
+### Requirements
+
+- Node.js
+- npm
+- A modern web browser
+- A reasonable amount of patience
+
+### Installation
 
 ```bash
 git clone https://github.com/azinamouto/GAY-M-OFF-.git
 cd GAY-M-OFF-
-```
-
-To use the Vite development server, install the project dependencies and start it from the repository root:
-
-```bash
 npm install
 npm run dev
 ```
 
-Alternatively, serve the files with Python:
+Open the local address displayed by the development server.
+
+You can also serve the static files using Python:
 
 ```bash
 python -m http.server 8000
 ```
 
-Open the local address printed in your terminal. For the Python command above, that's:
+Then open `http://localhost:8000`.
 
-`http://localhost:8000`
+The game uses JavaScript modules, so opening `index.html` directly may not work properly.
 
-And that's it, babe. You're in.
+If something breaks, open an issue.
 
-**Note:** The game uses JavaScript modules, so opening `index.html` directly from your file explorer may not work correctly.
-
----
-
-## 06. how to survive.
-
-**Mouse / Touch**
-
-Click your answers, chase suspicious buttons, and try not to question your life choices.
-
-**Keyboard**
-
-Use `Tab` to navigate and `Enter` or `Space` to interact. The game also supports skipping the boot sequence and returning from the instructions screen.
-
-**Audio**
-
-Retro sound effects are optional and disabled by default. Turn them on whenever you're ready for more noise.
-
-**Reduced Motion**
-
-The game respects reduced-motion preferences. Less shaking, less glitching, same amount of judgment.
+If you're about to report that the game is annoying, please reconsider. That's the feature.
 
 ---
 
-## 07. possible side effects.
+## Built with
 
-Depending on your choices, the game may award you one of three completely unofficial endings.
+No complicated framework. No backend. No database storing your embarrassing answers.
 
-**CERTIFIED BRO**
+Just the essentials.
 
-Congratulations. Extensive research has revealed absolutely nothing.
+| Technology | Purpose |
+|:--|:--|
+| **HTML5** | Structure and game interface |
+| **CSS3** | Responsive layout, visual effects, and animations |
+| **JavaScript ES6+** | Game logic, randomized questions, and state management |
+| **Web Audio API** | Optional sound effects and audio interactions |
 
-**CHAOS DETECTED**
+The project is organized into separate modules for questions, challenges, state, audio, narration, and UI behavior.
 
-You've confused the system. She's going through something.
-
-**THE GAME LOST**
-
-You didn't win. The game just couldn't deal with you anymore.
-
-No two personalities are being scientifically analyzed here. The results are fictional, dramatic, and completely unserious.
-
----
-
-## 08. a little developer diary.
-
-This is my first game jam project, made as an experiment in browser-based game development, interaction design, and making JavaScript behave in ways it probably shouldn't.
-
-The goal is simple: build something small, finish it properly, and make people laugh along the way.
-
-No giant engine. No unnecessary complexity. Just a tiny arcade game with a terrible attitude.
-
-### current checklist
-
-- [x] Game concept and identity
-- [x] Vanilla JavaScript architecture
-- [ ] Complete quiz experience
-- [ ] Three playable rage challenges
-- [ ] Sound and animation polish
-- [ ] Mobile testing
-- [ ] GitHub Pages deployment
-- [ ] Game jam submission
+Because messy code is only funny when it belongs to somebody else.
 
 ---
 
-## 09. before you go.
+## Features and design goals
 
-This game is satire. It doesn't determine anyone's sexuality, identity, intelligence, or worth.
+**Randomized gameplay**
 
-The Bro Meter is fictional. The results are nonsense. The narrator is confidently incorrect.
+Each run draws ten questions from a larger pool, with question-history tracking intended to keep repeated sessions varied.
 
-Please be nice to real people. The game is already doing enough.
+**Interactive rage challenges**
+
+Three deliberately frustrating encounters that test patience without requiring the player to perform impossible actions forever.
+
+**A narrator with an attitude**
+
+Contextual commentary, sarcastic reactions, and occasional unnecessary judgment.
+
+**Multiple endings**
+
+Three possible conclusions, none of which should be taken as a serious assessment of your personality.
+
+**Accessible interactions**
+
+Keyboard navigation, touch-friendly controls, optional audio, and reduced-motion support are part of the intended experience.
+
+**Lightweight architecture**
+
+A small browser game that doesn't require an entire technology company to run.
+
+---
+
+## Development status
+
+This is an experimental project under active development.
+
+| Milestone | Status |
+|:--|:--|
+| Game concept and identity | Complete |
+| Initial JavaScript architecture | Complete |
+| Full quiz experience | In progress |
+| Three playable challenges | Planned / in progress |
+| Audio and animation polish | Planned |
+| Responsive and accessibility testing | Planned |
+| Public playable deployment | Not yet published |
+| Game jam submission | Pending |
+
+The roadmap will be updated as features are implemented and verified.
+
+I'm trying to finish a game here, not maintain a museum of unfinished side projects.
+
+---
+
+## Contributing
+
+Found a genuine bug? Open an issue.
+
+Have a suggestion? Start a discussion in an issue.
+
+Want to improve something? Fork the repository and submit a pull request.
+
+Useful contributions include bug fixes, accessibility improvements, performance optimizations, and gameplay refinements.
+
+Please keep changes focused and explain what they do.
+
+And no, making the button even harder to click is not automatically an improvement.
+
+---
+
+## Disclaimer
+
+This game is satire.
+
+It doesn't determine anyone's sexuality, gender identity, intelligence, or personal worth. The questions are fictional, the results are deliberately meaningless, and the narrator has absolutely no qualifications.
+
+The joke is the game's absurd behavior, not anyone's identity.
+
+If the game insults you, congratulations. It insults everyone.
 
 ---
 
 <div align="center">
 
-### made with love, pink pixels, and mild frustration.
+### Congratulations. You reached the bottom.
+
+You survived an entire README for a game that isn't even finished yet.
+
+That's genuinely impressive.
+
+Unfortunately, there's no achievement for that.
 
 **GAY-M OFF**
 
 *she's cute. she's mean. she's written in JavaScript.*
 
-<sub>© 2026 · a little game with a lot of attitude.</sub>
+Made by [**azinamouto**](https://github.com/azinamouto) · 2026
 
 </div>
