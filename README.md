@@ -108,6 +108,17 @@ If something breaks, open an issue.
 
 If you're about to report that the game is annoying, please reconsider. That's the feature.
 
+### Check a change
+
+Run the TypeScript check and create a production build with:
+
+```bash
+npm run lint
+npm run build
+```
+
+To preview the production build locally, run `npm run preview` after the build.
+
 ---
 
 ## Built with
