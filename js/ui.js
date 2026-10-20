@@ -61,6 +61,7 @@ export class UIManager {
       endingQuote: document.getElementById('ending-quote'),
       endingDesc: document.getElementById('ending-desc'),
       endingBroScore: document.getElementById('ending-bro-score'),
+      endingQuestions: document.getElementById('ending-questions'),
       endingFrustration: document.getElementById('ending-frustration'),
       endingPokes: document.getElementById('ending-pokes'),
       endingHesitation: document.getElementById('ending-hesitation'),
@@ -443,6 +444,9 @@ export class UIManager {
     if (this.cachedElements.endingBroScore) {
       this.cachedElements.endingBroScore.textContent = `${state.broMeter}%`;
     }
+    if (this.cachedElements.endingQuestions) {
+      this.cachedElements.endingQuestions.textContent = `${state.completedQuestions.length} / ${state.selectedQuestions.length}`;
+    }
     if (this.cachedElements.endingFrustration) {
       this.cachedElements.endingFrustration.textContent = `${state.frustration} pts`;
     }
@@ -479,6 +483,7 @@ export class UIManager {
 `🎮 GAY-M OFF ARCHIVE REPORT 🎮
 Result: ${ending.title}
 Bro Meter: ${state.broMeter}%
+Questions Answered: ${state.completedQuestions.length} / ${state.selectedQuestions.length}
 Frustration Score: ${state.frustration} pts
 Glass Taps (Pokes): ${state.pokesCount || 0}
 Overthinking Incidents: ${state.hesitationsCount || 0}
