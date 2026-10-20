@@ -572,6 +572,20 @@ body {
   padding: 4px 8px;
 }
 
+.quiz-progress {
+  height: 8px;
+  overflow: hidden;
+  background-color: var(--color-void);
+  border: 1px solid var(--color-arcade-purple);
+}
+
+.quiz-progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-arcade-purple), var(--color-chaos-pink));
+  transition: width 0.3s ease;
+}
+
 .question-container {
   background-color: var(--color-void);
   border: 3px solid var(--color-arcade-purple);

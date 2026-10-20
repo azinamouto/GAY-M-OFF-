@@ -46,6 +46,8 @@ export class UIManager {
       // Quiz Elements
       quizStep: document.getElementById('quiz-step'),
       quizCategory: document.getElementById('quiz-category'),
+      quizProgress: document.querySelector('.quiz-progress'),
+      quizProgressFill: document.getElementById('quiz-progress-fill'),
       quizQuestionText: document.getElementById('quiz-question-text'),
       quizOptionsGrid: document.getElementById('quiz-options-grid'),
 
@@ -275,6 +277,15 @@ export class UIManager {
 
     if (this.cachedElements.quizCategory) {
       this.cachedElements.quizCategory.textContent = question.category;
+    }
+
+    if (this.cachedElements.quizProgress) {
+      this.cachedElements.quizProgress.setAttribute('aria-valuemax', String(selectedQuestions.length));
+      this.cachedElements.quizProgress.setAttribute('aria-valuenow', String(questionIndex + 1));
+    }
+    if (this.cachedElements.quizProgressFill) {
+      const progress = ((questionIndex + 1) / selectedQuestions.length) * 100;
+      this.cachedElements.quizProgressFill.style.width = `${progress}%`;
     }
 
     if (this.cachedElements.quizQuestionText) {
