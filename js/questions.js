@@ -23,6 +23,108 @@ export const QUESTION_SESSION_COUNT = 10;
 export const QUESTION_STORAGE_KEY = 'gay-m-off.question-history.v1';
 export const LAST_SESSION_STORAGE_KEY = 'gay-m-off.last-session-questions.v1';
 
+const GAY_QUIZ_FLAVORS = [
+  {
+    category: 'Queer Plot Twists',
+    text: 'Your crush texts “u up?” at 1:59 AM. The moon requests a dramatic response. What’s the move?',
+    options: [
+      { text: 'Reply with a 14-slide Canva deck titled “The Vibe.”', reaction: 'The Canva deck has been submitted to the Gay Arts Council. Stunning work.' },
+      { text: 'Send a glitter heart, then vanish into theatrical fog.', reaction: 'The fog machine approves. Your exit was camp excellence.' },
+      { text: 'Ask the group chat’s tiny gay council to convene.', reaction: 'The council has convened and unanimously voted: iconic.' },
+      { text: 'Arrive with snacks and absolutely no explanation.', reaction: 'Mysterious, snack-forward, and deeply queer. A perfect choice.' }
+    ]
+  },
+  {
+    category: 'Glitter Goblin Energy',
+    text: 'A raccoon in a tiny sash names you Duchess of the Laundromat. What is your first royal decree?',
+    options: [
+      { text: 'Every dryer gets a little disco ball.', reaction: 'The laundromat is sparkling. Your reign is already legendary.' },
+      { text: 'Mandatory dramatic spins while waiting for socks.', reaction: 'The spins have been witnessed. The gays are cheering.' },
+      { text: 'Promote the raccoon to Minister of Sequins.', reaction: 'A bold cabinet appointment. The raccoon accepts in a tiny bow tie.' },
+      { text: 'Replace all lost socks with tiny capes.', reaction: 'The sock capes are flying. This is exactly the correct amount of chaos.' }
+    ]
+  },
+  {
+    category: 'Romantic Nonsense',
+    text: 'Two people make eye contact over the last rainbow cupcake. The bakery soundtrack swells. What happens?',
+    options: [
+      { text: 'Split it like a dramatic season finale.', reaction: 'A shared cupcake and a shared cinematic universe. Beautiful.' },
+      { text: 'Challenge the cupcake to a dance battle.', reaction: 'The cupcake lost on choreography, but won your heart.' },
+      { text: 'Write it a tiny love letter in frosting.', reaction: 'The frosting letter is sticky, sincere, and extremely gay.' },
+      { text: 'Adopt the cupcake and give it joint custody.', reaction: 'The custody schedule is fair and the cupcake is thriving.' }
+    ]
+  },
+  {
+    category: 'Pride Parade Logistics',
+    text: 'Your parade float is powered by pure compliments and one suspiciously powerful fan. What’s the theme?',
+    options: [
+      { text: 'Disco dolphins campaigning for emotional honesty.', reaction: 'The dolphins have your vote. Their platform is glittering.' },
+      { text: 'A moving castle made entirely of dramatic hair.', reaction: 'The hair castle is structurally fabulous. Engineers are sobbing.' },
+      { text: 'Tiny dragons handing out hydration and affirmations.', reaction: 'The dragons say you are hydrated, loved, and doing amazing.' },
+      { text: 'A 40-foot glitter shrimp with main-character energy.', reaction: 'The shrimp has arrived. The crowd has entered its shrimp era.' }
+    ]
+  },
+  {
+    category: 'Queer Creature Feature',
+    text: 'A pigeon in eyeliner steals your seat and calls you “bestie.” How do you handle this bird drama?',
+    options: [
+      { text: 'Offer a tiny fan and ask about its situationship.', reaction: 'The pigeon has opened up. Your listening skills are immaculate.' },
+      { text: 'Challenge it to a runway walk-off.', reaction: 'The pigeon served feathers. You served face. Everyone wins.' },
+      { text: 'Give it a name tag that says “Local Icon.”', reaction: 'The name tag is on. The pigeon’s publicist is calling.' },
+      { text: 'Let it keep the seat; it has better eyeliner anyway.', reaction: 'A generous choice. The eyeliner community salutes you.' }
+    ]
+  },
+  {
+    category: 'Camp Catastrophes',
+    text: 'The karaoke machine only plays show tunes and ominous dolphin noises. The mic is yours. What do you sing?',
+    options: [
+      { text: 'A power ballad about your excellent snack opinions.', reaction: 'The snack ballad reached the cheap seats. Standing ovation.' },
+      { text: 'Duet with the dolphins; they know the bridge.', reaction: 'The dolphins nailed the harmony. The gays are emotionally moved.' },
+      { text: 'Whisper-sing while holding a disco ball like a baby.', reaction: 'Tender, sparkly, and completely unhinged. Encore!' },
+      { text: 'Make up lyrics about a very handsome lamp.', reaction: 'The lamp is blushing. This is a queer masterpiece.' }
+    ]
+  },
+  {
+    category: 'Glitter-Fueled Decisions',
+    text: 'A magical jacket grants one power: perfect eyeliner, instant snacks, or dramatic entrance music. Which chaos?',
+    options: [
+      { text: 'Perfect eyeliner, sharp enough to open a portal.', reaction: 'The portal is open and your wing is symmetrical. Legendary.' },
+      { text: 'Instant snacks, including emergency tiny pickles.', reaction: 'The pickles have appeared. The community is nourished.' },
+      { text: 'Entrance music for walking into any room, including kitchens.', reaction: 'The kitchen just became a stage. Take your bow, superstar.' },
+      { text: 'All three, because the jacket is clearly a people-pleaser.', reaction: 'The jacket understands the assignment. You are dressed for destiny.' }
+    ]
+  },
+  {
+    category: 'Friendship Fanfiction',
+    text: 'Your bestie says “I saved you the good chair” and it has a tiny bow on it. What’s your response?',
+    options: [
+      { text: 'Give the chair a standing ovation while sitting down.', reaction: 'The chair feels seen. Friendship has peaked.' },
+      { text: 'Declare it your shared throne for all future brunches.', reaction: 'A co-rulership built on brunch. The people approve.' },
+      { text: 'Add a second bow because the first one looked lonely.', reaction: 'The chair is now thriving in a supportive environment.' },
+      { text: 'Write the chair into your bestie’s wedding speech.', reaction: 'The chair has RSVP’d. This friendship is beautifully extra.' }
+    ]
+  },
+  {
+    category: 'Queer Space Opera',
+    text: 'Your spaceship is powered by compliments, iced coffee, and one very gay disco ball. Who’s the captain?',
+    options: [
+      { text: 'The ship’s glamorous houseplant, Captain Frond.', reaction: 'Captain Frond has charted a course toward self-expression.' },
+      { text: 'You, but only after a 12-minute outfit montage.', reaction: 'The montage was essential. Your captain look is stellar.' },
+      { text: 'A committee of queer frogs in tiny uniforms.', reaction: 'The frog committee has reached consensus. Ribbit and prosper.' },
+      { text: 'The disco ball; it has the most experience spinning.', reaction: 'A natural leader. The disco ball has excellent rotation.' }
+    ]
+  },
+  {
+    category: 'Unlicensed Gay Magic',
+    text: 'A wizard offers to turn your awkward pause into a physical object. What appears?',
+    options: [
+      { text: 'A tiny glitter cloud that says “take your time.”', reaction: 'The cloud is kind, sparkly, and emotionally available.' },
+      { text: 'A frog wearing a sash that reads “you’re doing great.”', reaction: 'The frog has excellent timing and even better accessories.' },
+      { text: 'A coupon for one free dramatic exit.', reaction: 'Your exit coupon is valid forever. Use it with flair.' },
+      { text: 'A disco ball small enough to fit in your pocket.', reaction: 'Pocket disco activated. Your pause is now a party.' }
+    ]
+  }
+];
 
 const FALLBACK_QUESTION = {
   id: 'fallback',
@@ -4624,16 +4726,26 @@ export function buildQuestionSet({ count = QUESTION_SESSION_COUNT, randomFn = Ma
       return (order[a.tier] ?? 99) - (order[b.tier] ?? 99);
     });
 
-  const finalized = finalSelection.map((question) => ({
-    ...question,
-    options: Array.isArray(question.options) ? question.options.map((option) => ({
-      ...option,
-      effect: ['none', 'suspicion', 'glitch', 'shake'].includes(option.effect) ? option.effect : 'none',
-      delta: Number.isFinite(Number(option.delta)) ? Number(option.delta) : 0,
-      reaction: typeof option.reaction === 'string' ? option.reaction : 'The machine holds judgment.',
-      reactions: Array.isArray(option.reactions) && option.reactions.length ? option.reactions : [typeof option.reaction === 'string' ? option.reaction : 'The machine holds judgment.']
-    })) : []
-  }));
+  const shuffledFlavors = fisherYatesShuffle(GAY_QUIZ_FLAVORS, randomFn);
+  const finalized = finalSelection.map((question, index) => {
+    const flavor = shuffledFlavors[index % shuffledFlavors.length];
+    return {
+      ...question,
+      category: flavor.category,
+      text: flavor.text,
+      options: flavor.options.map((flavorOption, optionIndex) => {
+        const sourceOption = question.options?.[optionIndex] || {};
+        return {
+          ...sourceOption,
+          text: flavorOption.text,
+          effect: ['none', 'suspicion', 'glitch', 'shake'].includes(sourceOption.effect) ? sourceOption.effect : 'none',
+          delta: Number.isFinite(Number(sourceOption.delta)) ? Number(sourceOption.delta) : 0,
+          reaction: flavorOption.reaction,
+          reactions: [flavorOption.reaction]
+        };
+      })
+    };
+  });
 
   const finalIds = finalized.map((question) => question.id);
   writeQuestionHistory([...readQuestionHistory(storage), ...finalIds], storage);

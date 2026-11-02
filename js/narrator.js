@@ -19,8 +19,8 @@ const DIALOGUE_POOLS = {
     "Read carefully. Or don't. It won't help either way."
   ],
   quiz_start: [
-    "Welcome to the psychological interrogation. Let's see your bro logic.",
-    "Question 1. Remember: there are no right answers, only humiliating ones."
+    "Welcome to the queer chaos quiz. Every answer is a valid flavor of gay.",
+    "Question 1. No right answers, just premium-grade gay nonsense."
   ],
   button_evasion: [
     "Too slow. Did you train your reflexes on a sloth?",
@@ -45,15 +45,14 @@ const DIALOGUE_POOLS = {
     "Moving you to the next chamber of nonsense."
   ],
   impossible_fail: [
-    "Skill issue detected. Please contact yourself.",
-    "Wrong. Try using less brain power.",
-    "Interesting choice. Completely incorrect, but interesting.",
-    "The quantum physics of brotherhood rejects this hypothesis."
+    "The gay goblin accepts this choice and requests a tiny cape.",
+    "The queer chaos committee approves. No notes, just glitter.",
+    "Your answer has been lovingly filed under: extremely gay behavior."
   ],
   impossible_pass: [
-    "Wisdom is knowing when to surrender to garbage logic.",
-    "Finally, you clicked the only sensible escape hatch.",
-    "The machine appreciates your begrudging compliance."
+    "The oracle accepts your queer artifact. The goblin is delighted.",
+    "You picked a favorite and the glitter multiverse applauds.",
+    "The machine recognizes your excellent taste in gay nonsense."
   ],
   ending_bro: [
     "After extensive analysis, we have learned absolutely nothing.",

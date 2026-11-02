@@ -231,13 +231,13 @@ export class UIManager {
       this.cachedElements.broMeterFill.style.width = `${clamped}%`;
     }
 
-    let statusText = "Suspiciously Normal";
+    let statusText = "Glitter Loading";
     if (clamped >= 76) {
-      statusText = "System Cannot Decide";
+      statusText = "Queer Chaos Overflow";
     } else if (clamped >= 51) {
-      statusText = "Certified Chaos";
+      statusText = "Certified Gay Chaos";
     } else if (clamped >= 26) {
-      statusText = "Bro Protocol Unstable";
+      statusText = "Serving Unstable";
     }
 
     if (this.cachedElements.broMeterStatus) {
@@ -247,9 +247,9 @@ export class UIManager {
 
   updateSoundButton(enabled) {
     if (this.cachedElements.soundToggleBtn) {
-      this.cachedElements.soundToggleBtn.innerHTML = enabled 
-        ? '🔊 SOUND: ON' 
-        : '🔇 SOUND: OFF';
+      this.cachedElements.soundToggleBtn.innerHTML = enabled
+        ? '🔊 AUDIO: ON'
+        : '🔇 AUDIO: OFF';
       this.cachedElements.soundToggleBtn.setAttribute('aria-pressed', enabled ? 'true' : 'false');
     }
   }
@@ -348,11 +348,17 @@ export class UIManager {
       b.style.pointerEvents = 'none';
     });
 
+    const selectedButton = allButtons[optIndex];
+    selectedButton?.classList.add('selected');
+    const selectedText = selectedButton?.querySelector('.opt-text');
+    if (selectedText) {
+      selectedText.textContent = `${optionData.text} — GAY PICK APPROVED ✨`;
+    }
+
     gameAudio.playAnswerSelect();
     gameState.recordQuestionCompletion(questionId || questionIndex, optIndex);
     gameState.updateBroMeter(optionData.delta);
 
-    this.triggerEffect(optionData.effect);
     narrator.speak(optionData.reaction);
 
     setTimeout(() => {
@@ -360,29 +366,6 @@ export class UIManager {
       gameState.get().currentQuestion = nextIndex;
       this.renderQuestion(nextIndex);
     }, 1400);
-  }
-
-  triggerEffect(effectType) {
-    if (effectType === 'shake') {
-      document.body.classList.add('shake-active');
-      gameAudio.playWrongAnswer();
-      setTimeout(() => document.body.classList.remove('shake-active'), 350);
-    } else if (effectType === 'glitch') {
-      const cabinet = document.querySelector('.arcade-cabinet');
-      if (cabinet) cabinet.classList.add('glitch-flash');
-      gameAudio.playGlitch();
-      setTimeout(() => cabinet && cabinet.classList.remove('glitch-flash'), 300);
-    } else if (effectType === 'suspicion') {
-      if (this.cachedElements.suspicionBanner) {
-        this.cachedElements.suspicionBanner.textContent = "⚠️ SUSPICION DETECTED: BRO PROTOCOL ANOMALY RECORDED ⚠️";
-        this.cachedElements.suspicionBanner.classList.add('show');
-        setTimeout(() => {
-          if (this.cachedElements.suspicionBanner) {
-            this.cachedElements.suspicionBanner.classList.remove('show');
-          }
-        }, 1800);
-      }
-    }
   }
 
   // ==========================================
@@ -394,7 +377,7 @@ export class UIManager {
     const titles = [
       "CHALLENGE A: THE RUNAWAY BUTTON",
       "CHALLENGE B: THE FAKE PROGRESS BAR",
-      "CHALLENGE C: THE IMPOSSIBLE QUESTION"
+      "CHALLENGE C: THE GAY GOBLIN ORACLE"
     ];
 
     if (this.cachedElements.challengeStepTitle) {

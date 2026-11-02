@@ -16,7 +16,6 @@ export class ChallengeManager {
     this.cleanups = [];
     this.evasionCount = 0;
     this.progressBarHasReset = false;
-    this.impossibleAttempts = 0;
   }
 
   cleanupCurrentChallenge() {
@@ -418,96 +417,47 @@ export class ChallengeManager {
   }
 
   // ==========================================
-  // CHALLENGE C — THE IMPOSSIBLE QUESTION (UPGRADED)
+  // CHALLENGE C — THE GAY GOBLIN ORACLE
   // ==========================================
   initImpossibleQuestion() {
-    this.impossibleAttempts = 0;
     const arena = document.getElementById('challenge-arena-content');
     if (!arena) return;
 
     arena.innerHTML = `
       <div class="impossible-question-container">
         <div class="impossible-question-prompt">
-          CALCULATE THE EXACT TRAJECTORY OF BRO-HOOD UNDER QUANTUM THERMAL PRESSURE:
+          THE GAY GOBLIN ORACLE ASKS: WHICH CHAOTIC QUEER ARTIFACT IS YOURS? NO WRONG ANSWERS.
         </div>
         <div class="impossible-choices-grid" id="impossible-options">
-          <button class="btn-impossible-opt" data-opt="1">A. Sub-atomic fistbump (420 Hz)</button>
-          <button class="btn-impossible-opt" data-opt="2">B. Gravitational gym-bro entanglement</button>
-          <button class="btn-impossible-opt" data-opt="3">C. Thermodynamic protein shake collapse</button>
-          <button class="btn-impossible-opt" data-opt="4">D. Schrödinger's locker room towel</button>
-        </div>
-        <div class="impossible-surrender-zone" id="impossible-surrender-zone">
-          <!-- Escape option reveals here after attempts -->
+          <button type="button" class="btn-impossible-opt" data-opt="1">A. Pocket-sized disco ball with big feelings</button>
+          <button type="button" class="btn-impossible-opt" data-opt="2">B. A frog in a sash declaring you iconic</button>
+          <button type="button" class="btn-impossible-opt" data-opt="3">C. Emergency glitter pickles from the moon</button>
+          <button type="button" class="btn-impossible-opt" data-opt="4">D. A tiny cape for your emotionally supportive snack</button>
         </div>
       </div>
     `;
 
     const optionsContainer = document.getElementById('impossible-options');
-    const surrenderZone = document.getElementById('impossible-surrender-zone');
-
-    narrator.speak("Challenge 3: Final challenge. Answer correctly or remain trapped in the cabinet.");
-
-    // Subtle bait teasing on option hover
-    const buttons = optionsContainer.querySelectorAll('.btn-impossible-opt');
-    buttons.forEach((b) => {
-      let hovered = false;
-      const originalText = b.textContent;
-      b.addEventListener('mouseenter', () => {
-        if (!hovered && this.impossibleAttempts > 0) {
-          hovered = true;
-          b.style.transform = 'translate(2px, -2px)';
-          setTimeout(() => {
-            b.style.transform = 'none';
-          }, 200);
-        }
-      });
-    });
+    narrator.speak('Final challenge: choose your favorite queer artifact. The oracle accepts every flavor of chaos.');
 
     const onOptionClick = (e) => {
       const targetBtn = e.target.closest('.btn-impossible-opt');
-      if (!targetBtn) return;
+      if (!targetBtn || targetBtn.disabled) return;
 
-      this.impossibleAttempts++;
+      optionsContainer.querySelectorAll('.btn-impossible-opt').forEach((button) => {
+        button.disabled = true;
+      });
       gameState.incrementAttempt('impossible');
-      gameState.addFrustration(2);
       gameState.updateBroMeter(4);
 
-      gameAudio.playBuzzer();
-      document.body.classList.add('shake-active');
-      setTimeout(() => document.body.classList.remove('shake-active'), 250);
+      gameAudio.playChallengeComplete();
+      gameState.recordChallengeCompletion(2);
+      targetBtn.textContent = 'GAY PICK APPROVED ✨';
+      narrator.speak('No right or wrong here. You chose queer chaos, and it chose you right back. Absolutely iconic.');
 
-      narrator.speak('impossible_fail', true);
-
-      targetBtn.classList.add('rejected');
-      setTimeout(() => targetBtn.classList.remove('rejected'), 400);
-
-      // After 2 attempts, reveal the bailout escape button!
-      if (this.impossibleAttempts >= 2 && surrenderZone && !document.getElementById('pass-btn')) {
-        surrenderZone.innerHTML = `
-          <button type="button" class="btn-pass-surrender pulse-warning" id="pass-btn">
-            ★ FINE. JUST LET ME PASS. ★
-          </button>
-        `;
-
-        const passBtn = document.getElementById('pass-btn');
-        if (passBtn) {
-          const onPassClick = () => {
-            gameAudio.playChallengeComplete();
-            gameState.recordChallengeCompletion(2);
-            narrator.speak('impossible_pass', true);
-
-            passBtn.disabled = true;
-            passBtn.textContent = "PASS GRANTED!";
-
-            this.activeTimeout = setTimeout(() => {
-              this.startChallenge(3); // Proceeds to endings
-            }, 1400);
-          };
-
-          passBtn.addEventListener('click', onPassClick);
-          this.cleanups.push(() => passBtn.removeEventListener('click', onPassClick));
-        }
-      }
+      this.activeTimeout = setTimeout(() => {
+        this.startChallenge(3);
+      }, 1400);
     };
 
     optionsContainer.addEventListener('click', onOptionClick);
