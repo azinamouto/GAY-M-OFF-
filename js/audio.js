@@ -1,16 +1,25 @@
 /**
  * GAY-M OFF — Web Audio Synthesizer
- * Pure Web Audio API retro 8-bit arcade sound effects.
- * Fails safely and gracefully. Defaults to OFF.
+ * Optional background music and Web Audio API arcade sound effects.
+ * Audio defaults to OFF.
  */
+
+const GAY_TRACK_URL = new URL('../assets/gay.mp3', import.meta.url).href;
 
 class RetroAudioSystem {
   constructor() {
     this.ctx = null;
     this.enabled = false;
+    this.music = null;
   }
 
   init() {
+    if (!this.music) {
+      this.music = new Audio(GAY_TRACK_URL);
+      this.music.loop = true;
+      this.music.volume = 0.35;
+    }
+
     if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
       try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -32,6 +41,23 @@ class RetroAudioSystem {
     if (this.enabled) {
       this.init();
       this.resume();
+      this.playMusic();
+    } else if (this.music) {
+      this.music.pause();
+      this.music.currentTime = 0;
+    }
+  }
+
+  playMusic() {
+    if (!this.enabled || !this.music) return;
+
+    const playback = this.music.play();
+    if (playback && typeof playback.catch === 'function') {
+      playback.catch((error) => {
+        if (this.enabled) {
+          console.warn('Background music could not be played:', error);
+        }
+      });
     }
   }
 
