@@ -42,7 +42,7 @@ The game is being developed as an experimental entry for **GitHub Game Off 2026*
 
 ## Gameplay
 
-You get ten questions per run, drawn from a larger question pool.
+You get ten silly queer-chaos questions per run, drawn from a larger question pool. Every option is valid; the game never grades your answers as right or wrong.
 
 Some are ridiculous. Some make absolutely no sense. A few might genuinely make you reconsider your friendships.
 
@@ -176,7 +176,7 @@ A small browser game that doesn't require an entire technology company to run.
 - Use Tab to move between controls and Enter or Space to activate them.
 - Space also skips the boot screen and mashes during the loading challenge.
 - Press Escape on the instructions screen to return to the menu.
-- Sound effects start off and can be toggled from the HUD.
+- The optional looping track in `assets/gay.mp3` and sound effects start off and can be toggled together from the HUD.
 - Animations honor your device's reduced-motion preference.
 
 ---
